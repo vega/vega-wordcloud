@@ -20,19 +20,17 @@
     "url": "https://github.com/vega/vega-wordcloud.git"
   },
   "scripts": {
-    "build": "npm run test && uglifyjs build/vega-wordcloud.js -c -m -o build/vega-wordcloud.min.js",
+    "build": "uglifyjs build/vega-wordcloud.js -c -m -o build/vega-wordcloud.min.js",
     "pretest": "rm -rf build && mkdir build && rollup -g vega-dataflow:vega,vega-scale:vega,vega-util:vega -f umd -n vega -o build/vega-wordcloud.js -- index.js",
     "test": "tape 'test/**/*-test.js' && eslint index.js src test",
     "prepublish": "npm run build",
     "postpublish": "git push && git push --tags && zip -j build/vega-wordcloud.zip -- LICENSE README.md build/vega-wordcloud.js build/vega-wordcloud.min.js"
   },
   "dependencies": {
+    "safe-canvas": "^1.1.0",
     "vega-dataflow": ">=2.0.0-beta",
     "vega-scale": "1",
     "vega-util": "1"
-  },
-  "optionalDependencies": {
-    "canvas": "^1.4.0"
   },
   "devDependencies": {
     "eslint": "2",
