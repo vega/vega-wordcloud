@@ -20,7 +20,7 @@
     "url": "https://github.com/vega/vega-wordcloud.git"
   },
   "scripts": {
-    "build": "uglifyjs build/vega-wordcloud.js -c -m -o build/vega-wordcloud.min.js",
+    "build": "npm run test && uglifyjs build/vega-wordcloud.js -c -m -o build/vega-wordcloud.min.js",
     "pretest": "rm -rf build && mkdir build && rollup -g vega-dataflow:vega,vega-scale:vega,vega-util:vega -f umd -n vega -o build/vega-wordcloud.js -- index.js",
     "test": "tape 'test/**/*-test.js' && eslint index.js src test",
     "prepublish": "npm run build",
