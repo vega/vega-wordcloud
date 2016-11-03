@@ -1,4 +1,5 @@
 import {error} from 'vega-util';
+import safeCanvas from 'safe-canvas';
 
 /*
 Copyright (c) 2013, Jason Davies.
@@ -365,11 +366,12 @@ function zeroArray(n) {
 }
 
 function cloudCanvas() {
-  try {
-    return new require('safe-canvas')();
-  } catch (e) {
-    error('Canvas unavailable. Run in browser or install node-canvas.');
+  var canvas = new safeCanvas();
+  if (canvas) {
+    return canvas;
   }
+
+  error('Canvas unavailable. Run in browser or install node-canvas.');
 }
 
 function functor(d) {
