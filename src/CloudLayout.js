@@ -392,7 +392,8 @@ function collideRects(a, b) {
 function archimedeanSpiral(size) {
   var e = size[0] / size[1];
   return function(t) {
-    return [e * (t *= .1) * Math.cos(t), t * Math.sin(t)];
+    t *= 0.1;
+    return [e * t * Math.cos(t), t * Math.sin(t)];
   };
 }
 
