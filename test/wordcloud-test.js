@@ -2,9 +2,9 @@ var tape = require('tape'),
     util = require('vega-util'),
     vega = require('vega-dataflow'),
     Collect = require('vega-transforms').collect,
-    Wordcloud = require('../').wordcloud;
+    Label = require('../').label;
 
-tape('Wordcloud generates wordcloud layout', function(test) {
+tape('Label generates label layout', function(test) {
   var data = [
     {text: 'foo', size: 49, index: 0},
     {text: 'bar', size: 36, index: 1},
@@ -17,7 +17,7 @@ tape('Wordcloud generates wordcloud layout', function(test) {
       df = new vega.Dataflow(),
       rot = df.add(null),
       c0 = df.add(Collect),
-      wc = df.add(Wordcloud, {
+      wc = df.add(Label, {
         size: [500, 500],
         text: text,
         fontSize: size,

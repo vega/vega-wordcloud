@@ -8,12 +8,12 @@ var Output = ['x', 'y', 'font', 'fontSize', 'fontStyle', 'fontWeight', 'angle'];
 
 var Params = ['text', 'font', 'rotate', 'fontSize', 'fontStyle', 'fontWeight'];
 
-export default function Wordcloud(params) {
+export default function Label(params) {
   Transform.call(this, cloud(), params);
 }
 
-Wordcloud.Definition = {
-  "type": "Wordcloud",
+Label.Definition = {
+  "type": "Label",
   "metadata": {"modifies": true},
   "params": [
     { "name": "size", "type": "number", "array": true, "length": 2 },
@@ -30,7 +30,7 @@ Wordcloud.Definition = {
   ]
 };
 
-var prototype = inherits(Wordcloud, Transform);
+var prototype = inherits(Label, Transform);
 
 prototype.transform = function(_, pulse) {
   function modp(param) {

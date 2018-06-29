@@ -1,1 +1,1 @@
-export {default as wordcloud} from './src/Wordcloud';
+export {default as label} from './src/Label';
