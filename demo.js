@@ -1,11 +1,19 @@
-import Label from './src/Label';
+vega.transforms.label = Label.label;
+// const spec = require("./bar.vg.json");
 
-vega.transforms.label = Label;
+var jsonText;
+var rawFile = new XMLHttpRequest();
+  rawFile.open('GET', './bar.vg.json', false);
+  rawFile.onreadystatechange = () => {
+    if(rawFile.readyState === 4)
+      if(rawFile.status === 200 || rawFile.status === 0)
+        jsonText = rawFile.responseText;
+  }
+rawFile.send(null);
 
-const spec = require("./bar.vg.json");
-
+var spec = JSON.parse(jsonText);
 new vega.View(vega.parse(spec))
-    .renderer('svg')  // set renderer (canvas or svg)
-    .initialize('#vis')  // initialize view within parent DOM container
-    .hover()             // enable hover encode set processing
-    .run();
+  .renderer('svg')     // set renderer (canvas or svg)
+  .initialize('#vis')  // initialize view within parent DOM container
+  .hover()             // enable hover encode set processing
+  .run();
