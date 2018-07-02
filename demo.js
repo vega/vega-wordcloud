@@ -1,5 +1,4 @@
 vega.transforms.label = Label.label;
-// const spec = require("./bar.vg.json");
 
 var jsonText;
 var rawFile = new XMLHttpRequest();
