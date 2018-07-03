@@ -2,7 +2,7 @@ import cloud from './CloudLayout';
 import {Transform} from 'vega-dataflow';
 import {constant, inherits, isFunction} from 'vega-util';
 import {scale} from 'vega-scale';
-// import {random} from 'vega-statistics';
+import {random} from 'vega-statistics';
 
 var Output = ['x', 'y', 'font', 'fontSize', 'fontStyle', 'fontWeight', 'angle'];
 
@@ -42,7 +42,7 @@ prototype.transform = function(_, pulse) {
   if (!(mod || pulse.changed(pulse.ADD_REM) || Params.some(modp))) return;
 
   var data = pulse.materialize(pulse.SOURCE).source,
-      // layout = this.value,
+      layout = this.value,
       as = _.as || Output,
       fontSize = _.fontSize || 14,
       range;
@@ -67,41 +67,37 @@ prototype.transform = function(_, pulse) {
   });
 
   // configure layout
-  // var words = layout
-  //   .words(data)
-  //   .text(_.text)
-  //   .size(_.size || [500, 500])
-  //   .padding(_.padding || 1)
-  //   .spiral(_.spiral || 'archimedean')
-  //   .rotate(_.rotate || 0)
-  //   .font(_.font || 'sans-serif')
-  //   .fontStyle(_.fontStyle || 'normal')
-  //   .fontWeight(_.fontWeight || 'normal')
-  //   .fontSize(fontSize)
-  //   .random(random);
-    // .layout();
+  var words = layout
+    .words(data)
+    .text(_.text)
+    .size(_.size || [500, 500])
+    .padding(_.padding || 1)
+    .spiral(_.spiral || 'archimedean')
+    .rotate(_.rotate || 0)
+    .font(_.font || 'sans-serif')
+    .fontStyle(_.fontStyle || 'normal')
+    .fontWeight(_.fontWeight || 'normal')
+    .fontSize(fontSize)
+    .random(random)
+    .layout();
 
-  var // size = layout.size(),
-      // dx = size[0] >> 1,
-      // dy = size[1] >> 1,
+  var size = layout.size(),
+      dx = size[0] >> 1,
+      dy = size[1] >> 1,
       i = 0,
-      // n = words.length,
-      n = data.length, t;
-      //w, t;
+      n = words.length,
+      w, t;
 
   for (; i<n; ++i) {
-    // w = words[i];
-    // t = w.datum;
-    t = data[i];
-    t[as[0]] = // w.x + dx;
-    10 * i;
-    t[as[1]] = // w.y + dy;
-    10 * i;
-    t[as[2]] = "sans-serif"; // w.font;
-    t[as[3]] = 10; // w.size;
-    t[as[4]] = "normal"; // w.style;
-    t[as[5]] = "normal"; //w.weight;
-    t[as[6]] = 0; // w.rotate;
+    w = words[i];
+    t = w.datum;
+    t[as[0]] = w.x + dx;
+    t[as[1]] = w.y + dy;
+    t[as[2]] = w.font;
+    t[as[3]] = w.size;
+    t[as[4]] = w.style;
+    t[as[5]] = w.weight;
+    t[as[6]] = w.rotate;
   }
 
   return pulse.reflow(mod).modifies(as);
