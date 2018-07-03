@@ -1,5 +1,5 @@
 export default {
-  "type": "Wordcloud",
+  "type": "Label",
   "metadata": {"modifies": true},
   "params": [
     { "name": "size", "type": "number", "array": true, "length": 2 },
